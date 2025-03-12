@@ -1,0 +1,7 @@
+#CLASSES
+-Base,Book,Library,LibraryOwner,Member,Borrow,Cli
+
+Database setup
+Session creation
+Registering models
+Creating tables
