@@ -21,16 +21,40 @@ def borrow_book(self,member_name,library_name,book_title,session):
         if not book:
             print(f" Error: '{book_title}' not found in '{library_name}' ")
             return
-
-        if book.member_id:#if book has been borrowed 
+         #checking if book has been borrowed 
+        if book.member_id:
              print(f"Sorry ,the book '{book_title}' has already been borrowed by somoene else") 
-              
+             return 
+
+        
+        #borrowing a book 
+        if not book.member_id:
+             book.member_id = member.id
+             print(f"'{book_title}' has been successfully borrowed. it is with {member_name}.")       
+             return
+
+
         session.commit()
 
-def return_book(self,member_name,library_name,book_title,session):
-        #find the member and library
-        #check if the book is member_id = member.id if yes ,set member_id to none 
+def return_book(member_name,book_title,session):
+        #find the member and book ,no need for library 
+        #check if the book's member_id = member.id if yes ,set member_id to none
+        #else show an error 
+        
+     
         member = session.query(Member).filter_by(name = member_name).first()
         if not member:
             print("Error: '{member_name}' is not a member")
-        library = session.query(Library).filter_by(library_name = library.name).first()
+            return
+        book = session.query(Book).filter_by(title = book_title,member_id = member.id).first()
+        if not book:
+            print(f"Error: The book '{book_title}' cannot be found or is not borrowed by '{member_name}'")
+            return
+        
+        #returning the book if found
+        book.member_id = None
+        print(f"the book '{book_title}'has been returned by '{member_name}' ")
+        session.commit()
+
+        
+            
