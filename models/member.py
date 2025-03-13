@@ -11,8 +11,9 @@ class Member(Base):
 
     library_id = Column(Integer, ForeignKey("libraries.id"))#link to library 
     library = relationship("Library", backref="members")
+    
+    """borrowed_books"""#attribute list
 
-
-
+        
     def __repr__(self):
         return f"<Member(name='{self.name}', library='{self.library.name}')>"
