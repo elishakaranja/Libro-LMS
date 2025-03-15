@@ -1,10 +1,12 @@
+#from main import session
 from models.book import Book
 from models.library import Library
 from models.member import Member
+from main import engine 
 
-def borrow_book(self,member_name,library_name,book_title,session):
+def borrow_book(member_name,library_name,book_title,session):
         #find the member 
-        member = session.query(Member).filter_by(name = member_name)
+        member = session.query(Member).filter_by(name = member_name).first()
         if not member:
             print(f"Error '{member_name}' is not a member. Try another name or sign up")
             return
@@ -16,7 +18,7 @@ def borrow_book(self,member_name,library_name,book_title,session):
             return
 
         #find book in specified library
-        book = session.query(Book).filter_by(title = book_title, library_id =library.id_).first()
+        book = session.query(Book).filter_by(title = book_title, library_id =library.id).first()
 
         if not book:
             print(f" Error: '{book_title}' not found in '{library_name}' ")
@@ -28,13 +30,15 @@ def borrow_book(self,member_name,library_name,book_title,session):
 
         
         #borrowing a book 
-        if not book.member_id:
-             book.member_id = member.id
-             print(f"'{book_title}' has been successfully borrowed. it is with {member_name}.")       
-             return
-
-
+        
+        book.member_id = member.id
+        #save change to db 
         session.commit()
+        print(f"'{book_title}' has been successfully borrowed. it is with {member_name}.")       
+        return
+
+
+        
 
 def return_book(member_name,book_title,session):
         #find the member and book ,no need for library 
@@ -44,7 +48,7 @@ def return_book(member_name,book_title,session):
      
         member = session.query(Member).filter_by(name = member_name).first()
         if not member:
-            print("Error: '{member_name}' is not a member")
+            print(f"Error: '{member_name}' is not a member")
             return
         book = session.query(Book).filter_by(title = book_title,member_id = member.id).first()
         if not book:
@@ -53,8 +57,9 @@ def return_book(member_name,book_title,session):
         
         #returning the book if found
         book.member_id = None
-        print(f"the book '{book_title}'has been returned by '{member_name}' ")
+        print(f"Error: the book '{book_title}' has been returned by '{member_name}' ")
         session.commit()
+
 
         
             

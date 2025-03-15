@@ -4,12 +4,14 @@ from sqlalchemy import create_engine
 from models.base import Base  # importing Base before models not after...create_all only creates tables for models that exists at the time it is called 
 from models.library import Library
 from models.owner import LibraryOwner
+from models.member import Member
 from models.book import Book
+
 
 DATABASE_URL = "sqlite:///library.db"
 
 # Setting up SQLAlchemy engine and session
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=True)#engine is the connection b2n python and the database 
 Session = sessionmaker(bind=engine)
 
 # creates the tables after models are imported 
