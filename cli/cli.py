@@ -111,7 +111,34 @@ def return_a_book(member_name,book_title):
 
     return result
 
-#search functionality 
+#search functionalty 
+def search_books(library_name, search_query):
+    """Search for books by title or author in a specific library."""
+    session = Session()
+
+    # Find the library
+    library = session.query(Library).filter_by(name=library_name).first()
+    if not library:
+        print(f"Library '{library_name}' does not exist.")
+        session.close()
+        return
+
+    # Search for books by title or author
+    books = session.query(Book).filter(
+        Book.library_id == library.id,
+        (Book.title.ilike(f"%{search_query}%") | Book.author.ilike(f"%{search_query}%"))
+    ).all()
+
+    # Display results
+    if books:
+        print("\nSearch Results:")
+        for book in books:
+            print(f"- {book.title} by {book.author}")
+    else:
+        print("No matching books found.")
+
+    session.close()
+
 
 
 
@@ -125,9 +152,10 @@ def main_menu():
         print("4. Add a book")
         print("5. Borrow a book")
         print("6. Return a book")
-        print("7. Exit")
+        print("7. Search books")
+        print("8. Exit")
         
-        choice = input("Enter your choice (1-7): ")
+        choice = input("Enter your choice (1-8): ")
         
         if choice == "1":
             owner = input("Enter owner name: ")
@@ -171,6 +199,12 @@ def main_menu():
             book = input("Enter book title: ")
             return_a_book(member, book)
         elif choice == "7":
+            library_name = input("Enter library name: ")
+            search_query = input("Enter book title or author to search: ")
+            search_books(library_name, search_query)
+
+
+        elif choice == "8":
             print("Exiting Libro. Goodbye!")
             break
         else:

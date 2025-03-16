@@ -11,7 +11,7 @@ from models.book import Book
 DATABASE_URL = "sqlite:///library.db"
 
 # Setting up SQLAlchemy engine and session
-engine = create_engine(DATABASE_URL, echo=True)#engine is the connection b2n python and the database 
+engine = create_engine(DATABASE_URL, echo=False)#engine is the connection b2n python and the database 
 Session = sessionmaker(bind=engine)
 
 # creates the tables after models are imported 
