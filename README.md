@@ -25,7 +25,7 @@ This is a **Command-Line Interface (CLI) Library Management System** built with 
    pipenv install 
    pipenv shell 
    pipenv run alembic upgrade head
-   pipenv run python main.py
+   pipenv run python cli/cli.py
 
 ### Usage
 Once the script is running, follow the on-screen prompts to:
