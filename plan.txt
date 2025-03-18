@@ -5,3 +5,20 @@ Database setup
 Session creation
 Registering models
 Creating tables
+
+Library Management System - Plan
+
+1. **Library Owner Features**  
+   - Create and manage a library  
+   - Add and remove books  
+   - Track borrowed books  
+   - Remove members  
+
+2. **Library Member Features**  
+   - Join a library  
+   - Borrow and return books  
+
+3. **Database & CLI**  
+   - Use SQLite for data storage  
+   - Implement Alembic for migrations  
+   - Provide a simple text-based menu for users  
