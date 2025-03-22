@@ -11,6 +11,8 @@ from models.library import Library
 from models.member import Member
 from models.book import Book
 from main import engine  # Importing the engine from main.py for the database connection
+from models.ai import get_book_recommendations
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 
@@ -139,6 +141,15 @@ def search_books(library_name, search_query):
 
     session.close()
 
+def recommend_books():
+    book_title = input("Enter a book title: ")
+    recommendations = get_book_recommendations(book_title)
+
+    print("\nRecommended Books:")
+    for book in recommendations:
+        print(f"- {book}")
+
+
 
 
 
@@ -153,8 +164,9 @@ def main_menu():
         print("5. Borrow a book")
         print("6. Return a book")
         print("7. Search books")
-        print("8. Exit")
-        
+        print("8. Get Book recommendation")
+        print("9. Exit")
+        ##//////////////////////////////////////////
         choice = input("Enter your choice (1-8): ")
         
         if choice == "1":
@@ -203,8 +215,10 @@ def main_menu():
             search_query = input("Enter book title or author to search: ")
             search_books(library_name, search_query)
 
-
         elif choice == "8":
+            recommend_books()
+
+        elif choice == "9":
             print("Exiting Libro. Goodbye!")
             break
         else:

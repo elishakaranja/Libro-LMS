@@ -9,6 +9,8 @@ sqlalchemy = "*"
 alembic = "*"
 python-dotenv = "*"
 openai = "*"
+google-generativeai = "*"
+requests = "*"
 
 [dev-packages]
 
