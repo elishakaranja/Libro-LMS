@@ -1,4 +1,7 @@
 # Library Management System (CLI)
+![Demo](./libro.gif)
+
+
 
 ## Description
 This is a **Command-Line Interface (CLI) Library Management System** built with Python and SQLAlchemy. It allows library owners to manage books, track borrowed books, and let members join a library.
