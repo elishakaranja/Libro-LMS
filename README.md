@@ -1,5 +1,5 @@
 # Library Management System (CLI)
-![Demo](./libro.gif)
+![Demo](libro.gif)
 
 
 
