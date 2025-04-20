@@ -5,12 +5,12 @@ name = "pypi"
 
 [packages]
 fire = "*"
-sqlalchemy = "*"
 alembic = "*"
 python-dotenv = "*"
 openai = "*"
 google-generativeai = "*"
 requests = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
